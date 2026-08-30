@@ -192,6 +192,11 @@
     flex-direction: column;
     gap: var(--space-md);
   }
+  .heatmap-scroll {
+    width: 100%;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
   .heatmap-stats-sidebar {
     flex-direction: row;
     flex-wrap: wrap;
@@ -206,9 +211,16 @@
   }
   .heatmap-stat-item {
     flex: 1;
-    min-width: 100px;
+    min-width: 80px;
   }
   .heatmap-stat-divider {
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  .heatmap-stat-value {
+    font-size: 0.9rem;
+  }
+}
+

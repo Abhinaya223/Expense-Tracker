@@ -60,3 +60,13 @@
     gap: var(--space-md);
   }
 }
+
+@media (max-width: 480px) {
+  .hero-stat-card {
+    padding: 14px 10px;
+  }
+  .hero-stat-card .mono-lg {
+    font-size: 1.5rem;
+  }
+}
+

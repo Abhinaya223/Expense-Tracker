@@ -45,9 +45,14 @@
 
 @media (max-width: 600px) {
   .top-nav {
-    padding: var(--space-sm) var(--space-md);
+    padding: 10px 12px;
+  }
+  .nav-logo {
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
   }
   .nav-email {
     display: none;
   }
 }
+

@@ -47,5 +47,16 @@
   .dashboard-main {
     padding: var(--space-md);
     gap: var(--space-md);
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 }
+
+@media (max-width: 480px) {
+  .dashboard-main {
+    padding: 10px 8px;
+    gap: 12px;
+  }
+}
+
