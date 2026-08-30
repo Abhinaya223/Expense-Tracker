@@ -1,0 +1,91 @@
+.goal-jar {
+  animation: fadeInUp 0.4s ease 0.1s both;
+  /* Prevent any inherited list-marker from showing as a stray dot */
+  list-style: none;
+}
+
+.goal-jar * {
+  list-style: none;
+}
+
+.goal-jar-edit {
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.goal-jar-edit-row {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.goal-jar-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.jar-svg {
+  width: 160px;
+  height: 210px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.jar-liquid {
+  transition: y 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.jar-wave {
+  animation: jarWaveAnim 3s ease-in-out infinite;
+}
+
+@keyframes jarWaveAnim {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+.jar-bubble {
+  animation: bubbleRise 3s ease-in-out infinite;
+}
+
+.jar-bubble-1 {
+  animation-delay: 0s;
+}
+
+.jar-bubble-2 {
+  animation-delay: 1s;
+}
+
+.jar-bubble-3 {
+  animation-delay: 2s;
+}
+
+.jar-percentage {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+}
+
+.goal-jar-stats {
+  display: flex;
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+.goal-jar-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.goal-jar-stat .text-muted {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .goal-jar-stats {
+    gap: var(--space-lg);
+  }
+}

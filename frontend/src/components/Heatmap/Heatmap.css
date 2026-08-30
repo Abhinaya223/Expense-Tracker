@@ -1,0 +1,214 @@
+.heatmap {
+  animation: fadeInUp 0.5s ease 0.2s both;
+  position: relative;
+}
+
+/* ── Layout: grid on left, stats sidebar on right ── */
+.heatmap-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+/* Scroll wrapper allows horizontal scroll on small viewports */
+.heatmap-scroll {
+  overflow-x: auto;
+  padding-bottom: var(--space-sm);
+  flex: 1;
+  min-width: 0;
+}
+
+.heatmap-container {
+  /* Let the grid size itself; no fixed min-width that leaves trailing space */
+  display: inline-flex;
+  flex-direction: column;
+}
+
+/* ── Month labels row ── */
+.heatmap-months {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+
+.heatmap-day-label-spacer {
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.heatmap-month-cell {
+  width: 16px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* ── Grid body ── */
+.heatmap-body {
+  display: flex;
+  gap: 4px;
+}
+
+.heatmap-day-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.heatmap-day-label {
+  height: 16px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heatmap-grid {
+  display: flex;
+  gap: 3px;
+}
+
+.heatmap-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heatmap-cell {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 2;
+}
+
+.heatmap-cell-empty {
+  background: transparent;
+  pointer-events: none;
+}
+
+.heatmap-level-0 { background: #1a1a24; }
+.heatmap-level-1 { background: #3d1520; box-shadow: none; }
+.heatmap-level-2 { background: #7a1f2e; }
+.heatmap-level-3 { background: #b8263a; }
+.heatmap-level-4 { background: #e0293f; box-shadow: 0 0 6px var(--primary-glow); }
+.heatmap-level-4:hover { box-shadow: 0 0 14px var(--primary-glow); }
+
+/* ── Legend ── */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-start;
+  margin-top: var(--space-md);
+}
+
+/* ── Stats sidebar ── */
+.heatmap-stats-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 160px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--border);
+  padding-left: var(--space-xl);
+  align-self: stretch;
+}
+
+.heatmap-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: var(--space-sm) 0;
+}
+
+.heatmap-stat-divider {
+  height: 1px;
+  background: var(--border);
+  opacity: 0.5;
+}
+
+.heatmap-stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.heatmap-stat-value {
+  font-size: 1rem;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.heatmap-stat-sub {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-family: var(--font-mono);
+}
+
+/* ── Tooltip ── */
+.heatmap-tooltip {
+  position: fixed;
+  transform: translate(-50%, -100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--text);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.heatmap-tooltip strong {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.heatmap-tooltip .mono-sm {
+  color: var(--primary);
+}
+
+/* ── Responsive: stack sidebar below grid on small screens ── */
+@media (max-width: 800px) {
+  .heatmap-layout {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  .heatmap-stats-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: var(--space-md);
+    min-width: unset;
+    width: 100%;
+    gap: var(--space-md);
+    align-self: auto;
+  }
+  .heatmap-stat-item {
+    flex: 1;
+    min-width: 100px;
+  }
+  .heatmap-stat-divider {
+    display: none;
+  }
+}

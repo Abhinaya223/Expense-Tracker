@@ -1,0 +1,59 @@
+.add-expense {
+  animation: fadeInUp 0.4s ease;
+}
+
+.add-expense-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--text);
+}
+
+.add-expense-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: transform var(--transition-base), background var(--transition-base);
+  box-shadow: var(--shadow-glow-primary);
+}
+
+.add-expense-toggle:hover .add-expense-toggle-icon {
+  transform: scale(1.1);
+}
+
+.add-expense-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.add-expense-row {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.add-expense-submit {
+  align-self: flex-end;
+  min-width: 160px;
+}
+
+@media (max-width: 600px) {
+  .add-expense-row {
+    flex-direction: column;
+  }
+}

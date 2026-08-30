@@ -1,0 +1,66 @@
+.category-chart {
+  animation: fadeInUp 0.5s ease 0.15s both;
+}
+
+.category-chart-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.category-chart-canvas {
+  position: relative;
+  height: 220px;
+  margin: 0 auto;
+  max-width: 220px;
+}
+
+.category-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.category-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.category-legend-item:hover {
+  background: var(--surface-hover);
+}
+
+.category-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.category-legend-icon {
+  font-size: 0.9rem;
+  width: 20px;
+  text-align: center;
+}
+
+.category-legend-label {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.category-legend-amount {
+  color: var(--text);
+  font-size: 0.8rem;
+}
+
+.category-legend-pct {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  width: 40px;
+  text-align: right;
+}

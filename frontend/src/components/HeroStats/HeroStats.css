@@ -1,0 +1,62 @@
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+  animation: fadeInUp 0.5s ease;
+}
+
+.hero-stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hero-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-stat-card .mono-lg {
+  color: var(--primary);
+  margin: 4px 0;
+}
+
+.hero-stat-card.stat-teal .mono-lg {
+  color: var(--teal);
+}
+
+.hero-stat-card.stat-danger .mono-lg {
+  color: var(--primary);
+}
+
+.hero-stat-card.stat-neutral .mono-lg {
+  color: var(--text);
+}
+
+.hero-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.hero-stat-sub {
+  font-size: 0.8rem;
+  color: var(--text-dim, var(--text-muted));
+}
+
+@media (max-width: 768px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}

@@ -1,0 +1,225 @@
+/* ================================================
+   Ledgerframe — Intro / Splash Screen
+   Netflix-style zoom-through transition
+   ================================================ */
+
+/* ── Backdrop ── */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0b0b0d;
+  /* Default: fully visible */
+  opacity: 1;
+  transition: none;
+}
+
+/* Phase: done — fully hidden, slide out of DOM space */
+.intro-phase-done {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease 0s;
+}
+
+/* ── Radial Flash Overlay ── */
+.intro-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(224, 41, 63, 0.7)   35%,
+    rgba(224, 41, 63, 0.0)   70%
+  );
+  transform: scale(0);
+}
+
+/* Flash fires when phase = flash */
+.intro-phase-flash .intro-flash,
+.intro-phase-done .intro-flash {
+  animation: radialFlash 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes radialFlash {
+  0%   { opacity: 0;    transform: scale(0); }
+  15%  { opacity: 1;    transform: scale(0.6); }
+  45%  { opacity: 0.85; transform: scale(1.4); }
+  100% { opacity: 0;    transform: scale(2.5); }
+}
+
+/* ── Content wrapper (logo + tagline) ── */
+.intro-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  /* Hardware-accelerate transforms from the start */
+  will-change: transform, opacity, filter;
+  transform-origin: center center;
+}
+
+/* Zoom-through punch — fires on phase=zoom */
+.intro-content-zoom,
+.intro-content-flash,
+.intro-content-done {
+  animation: zoomThrough 0.7s cubic-bezier(0.55, 0, 0.9, 0.5) forwards;
+}
+
+@keyframes zoomThrough {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  /* Accelerates hard at the end — "punch through" feel */
+  40% {
+    opacity: 0.85;
+    transform: scale(2.5);
+    filter: blur(2px);
+  }
+  80% {
+    opacity: 0.3;
+    transform: scale(10);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(22);
+    filter: blur(30px);
+  }
+}
+
+/* ── Logo ── */
+.intro-logo {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1px, 0.3vw, 4px);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7.5vw, 5.5rem);
+  letter-spacing: clamp(1px, 0.4vw, 4px);
+  line-height: 1;
+}
+
+/* ── Letter reveal animations ── */
+.intro-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: scale(0) rotateX(90deg);
+}
+
+.intro-letter.letter-white {
+  color: #ffffff;
+  animation: letterRevealWhite 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.intro-letter.letter-red {
+  color: var(--primary);
+  animation: letterRevealRed 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes letterRevealWhite {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotateX(90deg);
+    text-shadow: none;
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotateX(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+    text-shadow: 0 0 35px rgba(255, 255, 255, 0.4), 0 0 70px rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes letterRevealRed {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotateX(90deg);
+    text-shadow: none;
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotateX(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+    text-shadow: 0 0 40px var(--primary-glow), 0 0 80px rgba(224, 41, 63, 0.15);
+  }
+}
+
+/* ── Divider line ── */
+.intro-line {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff, var(--primary), transparent);
+  margin: 20px auto 16px;
+  animation: lineExpand 0.5s ease 1s forwards;
+}
+
+@keyframes lineExpand {
+  to { width: 220px; }
+}
+
+/* ── Tagline ── */
+.intro-tagline {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  opacity: 0;
+  /* Appears at 1.1s (hold phase) — slightly faster to sync with zoom */
+  animation: taglineFadeIn 0.4s ease 1.1s forwards;
+}
+
+@keyframes taglineFadeIn {
+  to { opacity: 1; }
+}
+
+/* ── Reduced-motion overrides ── */
+@media (prefers-reduced-motion: reduce) {
+  .intro-letter.letter-white {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+  .intro-letter.letter-red {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    text-shadow: 0 0 40px var(--primary-glow);
+  }
+  .intro-line {
+    width: 220px;
+    animation: none;
+  }
+  .intro-tagline {
+    opacity: 1;
+    animation: none;
+  }
+  /* No zoom, no flash — just crossfade the whole screen */
+  .intro-content-zoom,
+  .intro-content-flash,
+  .intro-content-done {
+    animation: none;
+  }
+  .intro-phase-flash .intro-flash,
+  .intro-phase-done .intro-flash {
+    animation: none;
+  }
+  .intro-phase-done {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+}
